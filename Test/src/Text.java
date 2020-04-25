@@ -3,12 +3,12 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class Text extends JFrame {
-	int count[] = {0, 0, 0};
+	int count[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 	String show = "";
-	String menu[] = {"햄버거", "콜라", "껌"};
+	String menu[] = {"햄버거", "라면", "김밥", "탄산", "커피", "물", "계란", "과자", "껌"};
 	String coin[] = {"50000", "10000", "5000", "1000", "500", "100", "50", "10"};
-	String namelist[] = {"햄버거 1000원", "  콜라 500원", "  껌 300원"};
-	int price[] = {1000, 500, 300};
+	String namelist[] = {"햄버거 1500원", " 라면 2000원", " 김밥 1000원", "  탄산 800원", "  커피 700원", "  물 600원", "  계란 500원", "  과자 600원", "   껌 300원"};
+	int price[] = {1500, 2000, 1000, 800, 700, 600, 500, 600, 300};
 	int money;
 	
 	public Text()
@@ -22,26 +22,36 @@ public class Text extends JFrame {
 		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		/**프레임 설정 완료**/
 		
-		/**위쪽 패널 설정**/
+		
+		/**JTabbedPane 생성**/
+		JTabbedPane jt = new JTabbedPane();
+		jt.setBackground(Color.gray);
+		jt.setPreferredSize(new Dimension(600, 300));
+		frame.pack();
+		/**JTabbedPane 생성 완료**/
+		
+		
+		
+		/**위쪽 패널(기본 식사류) 설정**/
 		//Up 설정
 		JPanel Up = new JPanel();
 		Up.setLayout(null);
-		Up.setBackground(Color.ORANGE);
+		Up.setBackground(Color.pink);
 		Up.setPreferredSize(new Dimension(600, 300));
 		frame.pack();
 		
-		JButton bt[] = new JButton[3];
-		Button plus[] = new Button[3];
-		Button minus[] = new Button[3];
-		JTextField suja[] = new JTextField[5];
-		ImageIcon icon[] = new ImageIcon[5];
-		JLabel name[] = new JLabel[3];
+		JButton bt[] = new JButton[9];
+		Button plus[] = new Button[9];
+		Button minus[] = new Button[9];
+		JTextField suja[] = new JTextField[9];
+		ImageIcon icon[] = new ImageIcon[9];
+		JLabel name[] = new JLabel[9];
 		
 		for(int i=0; i<3; i++)
 		{
 			bt[i] = new JButton(menu[i]);
 			bt[i].setBounds(80 + i * 150, 50, 100, 100);
-			icon[i] = new ImageIcon("Images/"+i+".jpg");
+			icon[i] = new ImageIcon("Images/"+(i+1)+".jpg");
 			bt[i].setIcon(icon[i]);
 			
 			suja[i] = new JTextField("0");
@@ -67,8 +77,92 @@ public class Text extends JFrame {
 			Up.add(name[i]);
 		}
 		
-		frame.add("North", Up);
+		jt.addTab("기본 식사류", Up);
 		/**위쪽 패널 설정 완료**/
+		
+		/**위쪽 패널(음료 코너) 설정**/
+		//Up 설정
+		JPanel Up2 = new JPanel();
+		Up2.setLayout(null);
+		Up2.setBackground(Color.pink);
+		Up2.setPreferredSize(new Dimension(600, 300));
+		frame.pack();
+		
+		for(int i=3; i<6; i++)
+		{
+			bt[i] = new JButton(menu[i]);
+			bt[i].setBounds(80 + (i-3) * 150, 50, 100, 100);
+			icon[i] = new ImageIcon("Images/"+(i+1)+".jpg");
+			bt[i].setIcon(icon[i]);
+			
+			suja[i] = new JTextField("0");
+			suja[i].setBackground(Color.white);
+			suja[i].setBounds(bt[i].getX() + 30, bt[i].getY() + 130, 40, 20);
+			suja[i].setEnabled(false);
+			
+			plus[i] = new Button("+");
+			plus[i].setEnabled(false);
+			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY()-0, 10, 10);
+			
+			minus[i] = new Button("-");
+			minus[i].setEnabled(false);
+			minus[i].setBounds(suja[i].getX() + 50, suja[i].getY()+10, 10, 10);
+			
+			name[i] = new JLabel(namelist[i]);
+			name[i].setBounds(bt[i].getX()+15, bt[i].getY()-30, 100, 20);
+			
+			Up2.add(bt[i]);
+			Up2.add(suja[i]);
+			Up2.add(plus[i]);
+			Up2.add(minus[i]);
+			Up2.add(name[i]);
+		}
+		
+		jt.addTab("음료 코너", Up2);
+		/**위쪽 패널 설정 완료**/
+		
+		/**위쪽 패널(스낵 코너) 설정**/
+		//Up3 설정
+		JPanel Up3 = new JPanel();
+		Up3.setLayout(null);
+		Up3.setBackground(Color.pink);
+		Up3.setPreferredSize(new Dimension(600, 300));
+		frame.pack();
+		
+		for(int i=6; i<9; i++)
+		{
+			bt[i] = new JButton(menu[i]);
+			bt[i].setBounds(80 + (i-6) * 150, 50, 100, 100);
+			icon[i] = new ImageIcon("Images/"+(i+1)+".jpg");
+			bt[i].setIcon(icon[i]);
+			
+			suja[i] = new JTextField("0");
+			suja[i].setBackground(Color.white);
+			suja[i].setBounds(bt[i].getX() + 30, bt[i].getY() + 130, 40, 20);
+			suja[i].setEnabled(false);
+			
+			plus[i] = new Button("+");
+			plus[i].setEnabled(false);
+			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY()-0, 10, 10);
+			
+			minus[i] = new Button("-");
+			minus[i].setEnabled(false);
+			minus[i].setBounds(suja[i].getX() + 50, suja[i].getY()+10, 10, 10);
+			
+			name[i] = new JLabel(namelist[i]);
+			name[i].setBounds(bt[i].getX()+15, bt[i].getY()-30, 100, 20);
+			
+			Up3.add(bt[i]);
+			Up3.add(suja[i]);
+			Up3.add(plus[i]);
+			Up3.add(minus[i]);
+			Up3.add(name[i]);
+		}
+		
+		jt.addTab("음료 코너", Up3);
+		/**위쪽 패널 설정 완료**/
+		
+		frame.add("North", jt);
 		
 		/**중간 패널 설정**/
 		JPanel Mid = new JPanel();
@@ -151,7 +245,7 @@ public class Text extends JFrame {
 				money = Integer.parseInt(have2.getText());
 				if(money>0 && money<=50000)
 				{
-					for(int i=0; i<3; i++)
+					for(int i=0; i<9; i++)
 					{
 						plus[i].setEnabled(true);
 						minus[i].setEnabled(true);
@@ -200,7 +294,7 @@ public class Text extends JFrame {
 		});
 		
 		//증감버튼 이벤트 설정
-		for(int i=0; i<3; i++)
+		for(int i=0; i<9; i++)
 		{	
 			int j = i;
 			plus[i].addActionListener(new ActionListener() {
@@ -208,7 +302,7 @@ public class Text extends JFrame {
 				{
 					count[j] = count[j]+1;
 					suja[j].setText(count[j] + "");
-					total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])));
+					total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])));
 				}
 			});
 			
@@ -218,17 +312,19 @@ public class Text extends JFrame {
 					if(count[j] > 0) {
 						count[j] = count[j]-1;
 						suja[j].setText(count[j]+"");
-						total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])));
+						total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])));
 						}
 					}
 				});
 			}
 		
+		//
+		
 		//구매 버튼 설정
 		pay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				int result = (count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2]);
+				int result = (count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8]);
 				int mok[] = {0, 0, 0, 0, 0, 0, 0, 0};
 				int Coin[] = {0, 0, 0, 0, 0, 0, 0, 0};
 				
@@ -262,7 +358,7 @@ public class Text extends JFrame {
 		reset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				for(int i=0; i<3; i++)
+				for(int i=0; i<9; i++)
 				{
 					suja[i].setText("0");
 					plus[i].setEnabled(false);
@@ -280,6 +376,42 @@ public class Text extends JFrame {
 				reset.setEnabled(false);
 			}
 		});
+		
+		//윈도우 리스너 설정 (종료 확인창 생성)
+		 frame.addWindowListener(new WindowListener() {
+	            @Override
+	            public void windowOpened(WindowEvent e) {
+	            }
+
+	            @Override
+	            public void windowIconified(WindowEvent e) {
+	            }
+
+	            @Override
+	            public void windowDeiconified(WindowEvent e) {
+	            }
+
+	            @Override
+	            public void windowDeactivated(WindowEvent e) {
+	            }
+
+	            @Override
+	            public void windowClosing(WindowEvent e) {
+	            	int result = JOptionPane.showConfirmDialog(null,  "정말로 종료하시겠습니까?", "예", JOptionPane.YES_NO_OPTION);
+	            	if(result == 0) System.exit(0);
+	            	else frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+	            }
+
+	            @Override
+	            public void windowClosed(WindowEvent e) {
+	            }
+
+	            @Override
+	            public void windowActivated(WindowEvent e) {
+	                System.out.println("TestSwing.main(...).new WindowListener() {...}.windowActivated()");
+	            }
+	        });
+
 	}
 
 	public static void main(String[] args)
