@@ -1,14 +1,14 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.net.URL;
 
 public class Text extends JFrame {
-	int count[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
-	String show = "";
-	String menu[] = {"햄버거", "라면", "김밥", "탄산", "커피", "물", "계란", "과자", "껌"};
-	String coin[] = {"50000", "10000", "5000", "1000", "500", "100", "50", "10"};
-	String namelist[] = {"햄버거 1500원", " 라면 2000원", " 김밥 1000원", "  탄산 800원", "  커피 700원", "  물 600원", "  계란 500원", "  과자 600원", "   껌 300원"};
-	int price[] = {1500, 2000, 1000, 800, 700, 600, 500, 600, 300};
+	int[] count = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	String[] menu = {"햄버거", "라면", "김밥", "탄산", "커피", "물", "계란", "과자", "껌"};
+	String[] coin = {"50000", "10000", "5000", "1000", "500", "100", "50", "10"};
+	String[] namelist = {"햄버거 1500원", " 라면 2000원", " 김밥 1000원", "  탄산 800원", "  커피 700원", "  물 600원", "  계란 500원", "  과자 600원", "   껌 300원"};
+	int[] price = {1500, 2000, 1000, 800, 700, 600, 500, 600, 300};
 	int money;
 	
 	public Text()
@@ -40,28 +40,31 @@ public class Text extends JFrame {
 		Up.setPreferredSize(new Dimension(600, 300));
 		frame.pack();
 		
-		JButton bt[] = new JButton[9];
-		Button plus[] = new Button[9];
-		Button minus[] = new Button[9];
-		JTextField suja[] = new JTextField[9];
-		ImageIcon icon[] = new ImageIcon[9];
-		JLabel name[] = new JLabel[9];
+		JButton[] bt = new JButton[9];
+		Button[] plus = new Button[9];
+		Button[] minus = new Button[9];
+		JTextField[] suja = new JTextField[9];
+		ImageIcon[] icon = new ImageIcon[9];
+		JLabel[] name = new JLabel[9];
 		
 		for(int i=0; i<3; i++)
 		{
 			bt[i] = new JButton(menu[i]);
-			bt[i].setBounds(80 + i * 150, 50, 100, 100);
-			icon[i] = new ImageIcon("Images/"+(i+1)+".jpg");
-			bt[i].setIcon(icon[i]);
+			bt[i].setBounds(100 + i * 150, 50, 100, 100);
+			
+			URL urlImage = getClass().getResource((i+1)+".jpg");
+			icon[i] = new ImageIcon(urlImage);
+			bt[i].setIcon(new imgresize().resize(icon[i]));
 			
 			suja[i] = new JTextField("0");
 			suja[i].setBackground(Color.white);
 			suja[i].setBounds(bt[i].getX() + 30, bt[i].getY() + 130, 40, 20);
 			suja[i].setEnabled(false);
+			suja[i].setDisabledTextColor(Color.BLACK.darker());
 			
 			plus[i] = new Button("+");
 			plus[i].setEnabled(false);
-			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY()-0, 10, 10);
+			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY(), 10, 10);
 			
 			minus[i] = new Button("-");
 			minus[i].setEnabled(false);
@@ -91,18 +94,24 @@ public class Text extends JFrame {
 		for(int i=3; i<6; i++)
 		{
 			bt[i] = new JButton(menu[i]);
-			bt[i].setBounds(80 + (i-3) * 150, 50, 100, 100);
-			icon[i] = new ImageIcon("Images/"+(i+1)+".jpg");
+			bt[i].setBounds(100 + (i-3) * 150, 50, 100, 100);
+			URL urlImage = getClass().getResource((i+1)+".jpg");
+			icon[i] = new ImageIcon(urlImage);
 			bt[i].setIcon(icon[i]);
-			
+			bt[i].setIcon(new imgresize().resize(icon[i]));
+
+
+
 			suja[i] = new JTextField("0");
 			suja[i].setBackground(Color.white);
 			suja[i].setBounds(bt[i].getX() + 30, bt[i].getY() + 130, 40, 20);
 			suja[i].setEnabled(false);
+			suja[i].setDisabledTextColor(Color.BLACK.darker());
+
 			
 			plus[i] = new Button("+");
 			plus[i].setEnabled(false);
-			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY()-0, 10, 10);
+			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY(), 10, 10);
 			
 			minus[i] = new Button("-");
 			minus[i].setEnabled(false);
@@ -132,18 +141,21 @@ public class Text extends JFrame {
 		for(int i=6; i<9; i++)
 		{
 			bt[i] = new JButton(menu[i]);
-			bt[i].setBounds(80 + (i-6) * 150, 50, 100, 100);
-			icon[i] = new ImageIcon("Images/"+(i+1)+".jpg");
+			bt[i].setBounds(100 + (i-6) * 150, 50, 100, 100);
+			URL urlImage = getClass().getResource((i+1)+".jpg");
+			icon[i] = new ImageIcon(urlImage);
 			bt[i].setIcon(icon[i]);
-			
+			bt[i].setIcon(new imgresize().resize(icon[i]));
+
 			suja[i] = new JTextField("0");
 			suja[i].setBackground(Color.white);
 			suja[i].setBounds(bt[i].getX() + 30, bt[i].getY() + 130, 40, 20);
 			suja[i].setEnabled(false);
-			
+			suja[i].setDisabledTextColor(Color.BLACK.darker());
+
 			plus[i] = new Button("+");
 			plus[i].setEnabled(false);
-			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY()-0, 10, 10);
+			plus[i].setBounds(suja[i].getX() + 50, suja[i].getY(), 10, 10);
 			
 			minus[i] = new Button("-");
 			minus[i].setEnabled(false);
@@ -159,7 +171,7 @@ public class Text extends JFrame {
 			Up3.add(name[i]);
 		}
 		
-		jt.addTab("음료 코너", Up3);
+		jt.addTab("간식 코너", Up3);
 		/**위쪽 패널 설정 완료**/
 		
 		frame.add("North", jt);
@@ -171,10 +183,11 @@ public class Text extends JFrame {
 		Mid.setPreferredSize(new Dimension(600, 400));
 		frame.pack();
 		
-		JTextField have1 = new JTextField();
+		JTextField have1;
 		have1 = new JTextField(" 현재 금액");
 		have1.setBounds(100, 50, 60, 30);
 		have1.setEnabled(false);
+		have1.setDisabledTextColor(Color.BLACK.darker());
 		
 		JTextField have2 = new JTextField();
 		have2.setBounds(have1.getX()+60, have1.getY(), 150, 30);
@@ -188,6 +201,7 @@ public class Text extends JFrame {
 		JTextField total2 = new JTextField();
 		total2.setBounds(total1.getX()+50, total1.getY(), 150, 30);
 		total2.setEnabled(false);
+
 		
 		JButton pay = new JButton("구매");
 		pay.setEnabled(false);
@@ -215,11 +229,11 @@ public class Text extends JFrame {
 		Down.setPreferredSize(new Dimension(600, 200));
 		frame.pack();
 		
-		JLabel rm[] = new JLabel[8];
+		JLabel[] rm = new JLabel[8];
 		JLabel rmm = new JLabel("거스름돈");
 		rmm.setBounds(250, 0, 100, 30);
 		Down.add(rmm);
-		JTextField rs[] = new JTextField[8];
+		JTextField[] rs = new JTextField[8];
 		
 		for(int i=0; i<8; i++)
 		{
@@ -229,7 +243,8 @@ public class Text extends JFrame {
 			rs[i] = new JTextField();
 			rs[i].setEnabled(false);
 			rs[i].setBounds(rm[i].getX(), rm[i].getY()+30, 40, 30);
-			
+			rs[i].setDisabledTextColor(Color.BLACK.darker());
+
 			Down.add(rm[i]);
 			Down.add(rs[i]);
 		}
@@ -239,28 +254,25 @@ public class Text extends JFrame {
 		/**아래쪽 패널 설정 완료**/
 		
 		//시작 버튼 이벤트 설정
-		start.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
+		start.addActionListener(e -> {
+			money = Integer.parseInt(have2.getText());
+			if(money>0 && money<=50000)
 			{
-				money = Integer.parseInt(have2.getText());
-				if(money>0 && money<=50000)
+				for(int i=0; i<9; i++)
 				{
-					for(int i=0; i<9; i++)
-					{
-						plus[i].setEnabled(true);
-						minus[i].setEnabled(true);
-						suja[i].setText("0");
-					}
-					pay.setEnabled(true);
-					have2.setEditable(false);
-					reset.setEnabled(true);
+					plus[i].setEnabled(true);
+					minus[i].setEnabled(true);
+					suja[i].setText("0");
 				}
-				else
-				{
-					JOptionPane.showMessageDialog(null,"다시 지폐를 넣어주세요(1~50000)");
-				}
-				start.setEnabled(false);
+				pay.setEnabled(true);
+				have2.setEditable(false);
+				reset.setEnabled(true);
 			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"다시 지폐를 넣어주세요(1~50000)");
+			}
+			start.setEnabled(false);
 		});
 		
 		//엔터키로 금액 입력 받기
@@ -294,26 +306,29 @@ public class Text extends JFrame {
 		});
 		
 		//증감버튼 이벤트 설정
+
+
 		for(int i=0; i<9; i++)
 		{	
 			int j = i;
-			plus[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e)
-				{
-					count[j] = count[j]+1;
-					suja[j].setText(count[j] + "");
-					total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])));
-				}
+			plus[i].addActionListener(e -> {
+				count[j] = count[j]+1;
+				suja[j].setText(count[j] + "");
+				total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])));
 			});
-			
-			minus[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e)
-				{
-					if(count[j] > 0) {
-						count[j] = count[j]-1;
-						suja[j].setText(count[j]+"");
-						total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])));
-						}
+
+			bt[i].addActionListener(e -> {
+				if(start.isEnabled() == false){
+				count[j] = count[j]+1;
+				suja[j].setText(count[j] + "");
+				total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])));
+			}});
+
+			minus[i].addActionListener(e -> {
+				if(count[j] > 0) {
+					count[j] = count[j]-1;
+					suja[j].setText(count[j]+"");
+					total2.setText(Integer.toString((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])));
 					}
 				});
 			}
@@ -321,60 +336,55 @@ public class Text extends JFrame {
 		//
 		
 		//구매 버튼 설정
-		pay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
+		pay.addActionListener(e -> {
+			int result = (count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8]);
+			int[] mok = {0, 0, 0, 0, 0, 0, 0, 0};
+			int[] Coin = {0, 0, 0, 0, 0, 0, 0, 0};
+
+			for(int i=0; i<8; i++)
 			{
-				int result = (count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8]);
-				int mok[] = {0, 0, 0, 0, 0, 0, 0, 0};
-				int Coin[] = {0, 0, 0, 0, 0, 0, 0, 0};
-				
-				for(int i=0; i<8; i++)
+				Coin[i] = Integer.parseInt(coin[i]);
+			}
+
+			if(money >= result)
+			{
+				result = money - result;
+
+				for(int i=0; i<coin.length; i++)
 				{
-					Coin[i] = Integer.parseInt(coin[i]);
-				}
-				
-				if(money >= result)
-				{
-					result = money - result;
-					
-					for(int i=0; i<coin.length; i++)
+					if(Coin[i] <= result)
 					{
-						if(Coin[i] <= result)
-						{
-							mok[i]  = result/Coin[i];
-							result = result - mok[i]*Coin[i];
-						}
-						rs[i].setText(Integer.toString(mok[i]));
+						mok[i]  = result/Coin[i];
+						result = result%Coin[i];
 					}
+					rs[i].setText(Integer.toString(mok[i]));
 				}
-				else
-				{
-					JOptionPane.showMessageDialog(null,"돈이 모자랍니다...");
-				}
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null,"돈이 모자랍니다...");
 			}
 		});
 		
 		//초기화 버튼 설정
-		reset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
+		reset.addActionListener(e -> {
+			for(int i=0; i<9; i++)
 			{
-				for(int i=0; i<9; i++)
-				{
-					suja[i].setText("0");
-					plus[i].setEnabled(false);
-					minus[i].setEnabled(false);
-				}
-				for(int i=0; i<8; i++)
-				{
-					rs[i].setText("0");
-				}
-				start.setEnabled(true);
-				have2.setText("0");
-				have2.setEditable(true);
-				total2.setText("0");
-				pay.setEnabled(false);
-				reset.setEnabled(false);
+				count[i] = 0;
+				suja[i].setText("0");
+				plus[i].setEnabled(false);
+				minus[i].setEnabled(false);
 			}
+			for(int i=0; i<8; i++)
+			{
+				rs[i].setText("0");
+			}
+			start.setEnabled(true);
+			have2.setText("0");
+			have2.setEditable(true);
+			total2.setText("0");
+			pay.setEnabled(false);
+			reset.setEnabled(false);
 		});
 		
 		//윈도우 리스너 설정 (종료 확인창 생성)
