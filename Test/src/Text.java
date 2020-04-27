@@ -2,11 +2,13 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.Arrays;
 
 public class Text extends JFrame {
+	int Result[][] = new int[50001][8];
 	int[] count = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 	String[] menu = {"햄버거", "라면", "김밥", "탄산", "커피", "물", "계란", "과자", "껌"};
-	String[] coin = {"50000", "10000", "5000", "1000", "500", "100", "50", "10"};
+	String[] coin = {"50000", "10000", "5000", "1000", "500", "160", "50", "10"};
 	String[] namelist = {"햄버거 1500원", " 라면 2000원", " 김밥 1000원", "  탄산 800원", "  커피 700원", "  물 600원", "  계란 500원", "  과자 600원", "   껌 300원"};
 	int[] price = {1500, 2000, 1000, 800, 700, 600, 500, 600, 300};
 	int money;
@@ -284,7 +286,7 @@ public class Text extends JFrame {
 					money = Integer.parseInt(have2.getText());
 					if(money>0 && money<=50000)
 					{
-						for(int i=0; i<3; i++)
+						for(int i=0; i<9; i++)
 						{
 							plus[i].setEnabled(true);
 							minus[i].setEnabled(true);
@@ -293,12 +295,12 @@ public class Text extends JFrame {
 						pay.setEnabled(true);
 						have2.setEditable(false);
 						reset.setEnabled(true);
+						start.setEnabled(false);
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(null,"다시 지폐를 넣어주세요(1~50000)");
 					}
-					start.setEnabled(false);
 				}
 			}
 			public void keyReleased(KeyEvent e) {}
@@ -337,7 +339,46 @@ public class Text extends JFrame {
 		
 		//구매 버튼 설정
 		pay.addActionListener(e -> {
-			int result = (count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8]);
+			int Times[] = new int[50001];
+			int result = money - ((count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8]));
+			if(result < 0)
+			{
+				JOptionPane.showMessageDialog(null,"돈이 모자랍니다...");
+			}
+			int Money[] = new int[9];
+			
+			Arrays.fill(Times, 127);
+			Times[0] = 0;
+			
+			Arrays.fill(Result[0],  0);
+			
+			for(int i=0; i<8; i++)
+			{
+				Money[i] = Integer.parseInt(coin[i]);
+			}
+			
+			
+			for(int i=0; i<=result; i++)
+			{
+				for(int j=0; j<8; j++)
+				{
+					if(Money[j]<=i && Times[i-Money[j]]+1 < Times[i])
+					{
+						Times[i] = Times[i-Money[j]] + 1;
+						Result[i]= Arrays.copyOf(Result[i-Money[j]], Result[i].length);
+						
+						Result[i][j]++;
+					}
+				}
+			}
+			
+			for(int i=0; i<8; i++)
+			{
+				rs[i].setText(Integer.toString(Result[result][i]));
+			}
+			
+			/**
+			int result = (count[0]*price[0])+(count[1]*price[1]) + (count[2]*price[2])+ (count[3]*price[3])+ (count[4]*price[4])+ (count[5]*price[5])+ (count[6]*price[6])+ (count[7]*price[7])+ (count[8]*price[8])-;
 			int[] mok = {0, 0, 0, 0, 0, 0, 0, 0};
 			int[] Coin = {0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -364,6 +405,7 @@ public class Text extends JFrame {
 			{
 				JOptionPane.showMessageDialog(null,"돈이 모자랍니다...");
 			}
+			**/
 		});
 		
 		//초기화 버튼 설정
