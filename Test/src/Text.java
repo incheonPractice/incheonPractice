@@ -258,7 +258,11 @@ public class Text extends JFrame {
 		//시작 버튼 이벤트 설정
 		start.addActionListener(e -> {
 			money = Integer.parseInt(have2.getText());
-			if(money>0 && money<=50000)
+			if(money%10 != 0)
+			{
+				JOptionPane.showMessageDialog(null,"제대로 동전을 입력해주세요");
+			}
+			else if(money>0 && money<=50000)
 			{
 				for(int i=0; i<9; i++)
 				{
@@ -269,12 +273,12 @@ public class Text extends JFrame {
 				pay.setEnabled(true);
 				have2.setEditable(false);
 				reset.setEnabled(true);
+				start.setEnabled(false);
 			}
 			else
 			{
 				JOptionPane.showMessageDialog(null,"다시 지폐를 넣어주세요(1~50000)");
 			}
-			start.setEnabled(false);
 		});
 		
 		//엔터키로 금액 입력 받기
@@ -284,7 +288,11 @@ public class Text extends JFrame {
 				if(e.getKeyChar() == '\n')
 				{
 					money = Integer.parseInt(have2.getText());
-					if(money>0 && money<=50000)
+					if(money%10 != 0)
+					{
+						JOptionPane.showMessageDialog(null,"제대로 동전을 입력해주세요");
+					}
+					else if(money>0 && money<=50000)
 					{
 						for(int i=0; i<9; i++)
 						{
